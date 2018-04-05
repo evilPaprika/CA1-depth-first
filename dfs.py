@@ -1,24 +1,6 @@
 from sortedcontainers import SortedSet
 
 
-def dfs_old(nodes):
-    stack = [1]
-    result = [SortedSet([1])]
-    while stack:
-        vertex = stack.pop() - 1
-        for child in nodes[vertex]:
-            if child not in result[len(result)-1]:
-                stack.append(child)
-                result[len(result)-1].add(child)
-                print(child)
-        if len(stack) == 0 and sum(len(s) for s in result) < len(nodes):
-            stack.append((set(range(1, len(nodes) + 1)) -
-                          set(item for sublist in result for item in sublist)).pop())
-            result.append(SortedSet())
-
-    return result
-
-
 def find_all_in_component_recursive(nodes, node, visited, result=None):
     if not result: result = SortedSet()
     print(node)
